@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jubilación — Último turno, primera ruta</title>
+<meta name="description" content="Comida de jubilación. Confirma tu asistencia y elige menú.">
+<meta property="og:title" content="Último turno, primera ruta">
+<meta property="og:description" content="Comida de jubilación. Confirma tu asistencia y elige menú.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏍️</text></svg>">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#0b0b0d;--bg2:#111114;--panel:#17171b;--panel2:#1e1e23;--line:#2d2d34;
+  --ink:#f3efe9;--muted:#a49c92;--orange:#ff6a15;--orange-soft:#ffa062;
+  --steel:#9aa3ad;--ok:#57c98a;--shadow:0 18px 40px rgba(0,0,0,.45);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#efebe4;--bg2:#e6e1d8;--panel:#fff;--panel2:#f6f3ee;--line:#d9d2c6;
+    --ink:#18171a;--muted:#6a645c;--steel:#6b7480;--shadow:0 14px 34px rgba(60,50,35,.14);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0b0d;--bg2:#111114;--panel:#17171b;--panel2:#1e1e23;--line:#2d2d34;
+  --ink:#f3efe9;--muted:#a49c92;--steel:#9aa3ad;--shadow:0 18px 40px rgba(0,0,0,.45);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 12px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:17px;line-height:1.55;overflow-x:hidden}
+h1,h2,h3{font-family:"Bebas Neue","Barlow Condensed",Impact,sans-serif;font-weight:400;letter-spacing:.02em;line-height:.95;margin:0}
+a{color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+.stripes{height:12px;background:repeating-linear-gradient(45deg,var(--orange) 0 14px,#121214 14px 28px)}
+section{padding:54px 0}
+.eyebrow{font:600 13px/1 "Barlow";letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+h2{font-size:clamp(34px,6vw,52px)}
+.lead{color:var(--muted)}
+.hero{position:relative;overflow:hidden;text-align:center;padding:44px 0 56px;
+  background:radial-gradient(120% 90% at 50% -10%,rgba(255,106,21,.22),transparent 60%),linear-gradient(180deg,var(--bg2),var(--bg))}
+.hero .bike{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:min(1100px,150%);opacity:.10;pointer-events:none}
+.patch{width:clamp(150px,34vw,196px);height:auto;filter:drop-shadow(0 10px 22px rgba(0,0,0,.35))}
+.hero h1{font-size:clamp(46px,12vw,104px);margin:14px 0 6px}
+.hero .sub{font:600 14px/1.4 "Barlow";letter-spacing:.24em;text-transform:uppercase;color:var(--steel)}
+.kicker{display:inline-block;font:600 12px/1 "Barlow";letter-spacing:.24em;text-transform:uppercase;color:#12100e;background:var(--orange);padding:8px 14px;border-radius:99px}
+.tagline{font-size:clamp(19px,3.4vw,25px);margin:18px auto 0;max-width:34ch;font-style:italic;opacity:.92}
+.count{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.count div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 6px;min-width:78px;box-shadow:var(--shadow)}
+.count b{display:block;font-family:"Bebas Neue",sans-serif;font-size:36px;color:var(--orange);line-height:1}
+.count span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.card h3{font-size:26px;margin-bottom:4px}
+.card .val{font-size:18px;font-weight:600}
+.card .ico{width:26px;height:26px;color:var(--orange);margin-bottom:8px}
+.tbd{color:var(--muted);font-style:italic;font-weight:400}
+.bio p{margin:0 0 14px}
+.bio .pull{border-left:4px solid var(--orange);padding-left:16px;font-size:19px}
+.form{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+label{display:block;font:600 13px/1 "Barlow";letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:16px 0 7px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 13px;min-height:46px}
+textarea{min-height:92px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);outline-offset:1px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 15px/1 "Barlow";
+  letter-spacing:.06em;text-transform:uppercase;background:var(--orange);color:#14110e;border:0;
+  border-radius:99px;padding:15px 26px;cursor:pointer;min-height:50px;text-decoration:none}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.note{font-size:14px;color:var(--muted);margin-top:10px}
+.banner{border-radius:14px;padding:13px 15px;font-size:15px;margin-bottom:16px;border:1px dashed var(--line);background:var(--panel2)}
+.banner.warn{border-color:var(--orange);color:var(--orange-soft)}
+.banner.ok{border-style:solid;border-color:var(--ok);color:var(--ok)}
+.plaza{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:var(--panel2)}
+.plaza .ph{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.plaza .ph span{font:700 12px/1 "Barlow";letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
+.mini{background:none;border:0;color:var(--muted);font:600 13px "Barlow";cursor:pointer;text-decoration:underline;padding:4px 0}
+.ok-box{text-align:center;padding:26px 10px}
+.ok-box .tick{width:64px;height:64px;color:var(--ok);margin-bottom:10px}
+.ok-box h3{font-size:34px;margin-bottom:8px}
+footer{padding:34px 0 46px;text-align:center;color:var(--muted);font-size:14px}
+.hidden{display:none !important}
+.hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+
+<div class="stripes"></div>
+
+<header class="hero">
+  <svg class="bike" viewBox="0 0 400 140" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="80" cy="100" r="32"/><circle cx="80" cy="100" r="10"/>
+    <circle cx="310" cy="100" r="32"/><circle cx="310" cy="100" r="10"/>
+    <path d="M80 100 L140 66 L215 60 L290 96"/><path d="M215 60 L250 42 L286 46"/>
+    <path d="M286 46 L300 30 L340 26"/><path d="M128 60 Q165 44 205 52"/>
+    <path d="M96 106 L210 96"/><path d="M140 66 L120 100"/>
+  </svg>
+  <div class="wrap">
+    <svg class="patch" viewBox="0 0 240 240" role="img" aria-label="Emblema de la jubilación">
+      <defs>
+        <path id="arcTop" d="M120,120 m-92,0 a92,92 0 0 1 184,0" fill="none"/>
+        <path id="arcBot" d="M120,120 m-92,0 a92,92 0 0 0 184,0" fill="none"/>
+      </defs>
+      <circle cx="120" cy="120" r="112" fill="#121214" stroke="var(--orange)" stroke-width="5"/>
+      <circle cx="120" cy="120" r="98" fill="none" stroke="var(--steel)" stroke-width="1.5" opacity=".55"/>
+      <g transform="translate(120,124)" fill="var(--orange)">
+        <path id="blade" d="M -7 -12.12 L -26 -45.03 A 52 52 0 0 1 26 -45.03 L 7 -12.12 A 14 14 0 0 0 -7 -12.12 Z"/>
+        <use href="#blade" transform="rotate(120)"/>
+        <use href="#blade" transform="rotate(240)"/>
+        <circle r="8"/>
+      </g>
+      <text font-family="Bebas Neue, sans-serif" font-size="21" fill="#f3efe9" letter-spacing="3">
+        <textPath href="#arcTop" startOffset="50%" text-anchor="middle">ÚLTIMO TURNO</textPath>
+      </text>
+      <text font-family="Bebas Neue, sans-serif" font-size="21" fill="#ff6a15" letter-spacing="3">
+        <textPath href="#arcBot" startOffset="50%" text-anchor="middle">PRIMERA RUTA</textPath>
+      </text>
+    </svg>
+    <div class="kicker">Fiesta de jubilación</div>
+    <h1 id="heroName">Nombre del homenajeado</h1>
+    <div class="sub" id="heroSub">Radiofísico hospitalario · Motero de pura cepa</div>
+    <p class="tagline" id="heroTag">Cuelga la bata, no el casco.</p>
+    <div class="count" id="countdown"></div>
+    <div class="btns" style="justify-content:center">
+      <a class="btn" href="#alta">Confirmar asistencia</a>
+    </div>
+  </div>
+</header>
+
+<div class="stripes"></div>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">La cita</div>
+    <h2>Dónde y cuándo</h2>
+    <p class="lead">Punto de encuentro, hora de salida y protocolo de vestimenta.</p>
+    <div class="grid" style="margin-top:22px">
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+        <h3>Fecha</h3><div class="val" id="cFecha">Por confirmar</div>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <h3>Hora</h3><div class="val" id="cHora">Por confirmar</div>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <h3>Lugar</h3><div class="val" id="cLugar">Por confirmar</div>
+        <div class="note" id="cDireccion"></div>
+        <div class="note"><a id="cMapa" class="hidden" target="_blank" rel="noopener">Ver en el mapa →</a></div>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 20v-6a7 7 0 0 1 14 0v6"/><path d="M3 20h18"/><path d="M9 9l1.5-4h3L15 9"/></svg>
+        <h3>Etiqueta</h3><div class="val" id="cDress">—</div>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg>
+        <h3>Aportación</h3><div class="val" id="cAporta">Por confirmar</div>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16l-7-3-7 3Z"/></svg>
+        <h3>Avisos</h3><div class="val" id="cNotas">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg2)">
+  <div class="wrap bio">
+    <div class="eyebrow">El homenajeado</div>
+    <h2>Dos vidas en paralelo</h2>
+    <div style="margin-top:18px">
+      <p class="pull">Media vida calculando dosis al milímetro y la otra media midiendo distancias en curvas.</p>
+      <p>Se pasó los años exigiendo que cada centigray cayera donde tenía que caer: controles de calidad a primera hora, dosimetrías imposibles, el acelerador caído un viernes por la tarde y él allí, con la sonda en la mano y la paciencia intacta.</p>
+      <p>Y cuando el búnker cerraba, cambiaba el plomo por el asfalto. Dos ruedas, un depósito lleno y ninguna prisa. La misma precisión, otro tipo de trayectoria.</p>
+      <p>Ahora le toca la ruta larga, esa sin fecha de fin de tratamiento. Vamos a despedirle como se merece: comiendo bien y contando batallas.</p>
+    </div>
+  </div>
+</section>
+
+<div class="stripes"></div>
+
+<section id="alta">
+  <div class="wrap">
+    <div class="eyebrow">Confirmación de asistencia</div>
+    <h2>Dame el alta</h2>
+    <p class="lead">Apúntate, di cuántos venís y elige el plato de cada uno.</p>
+
+    <div id="banner" class="banner hidden" style="margin-top:20px"></div>
+
+    <div class="form" style="margin-top:20px">
+      <form id="rsvp" novalidate>
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <label for="fResp">Tu nombre</label>
+        <input id="fResp" type="text" autocomplete="name" placeholder="Nombre y apellido" required>
+
+        <label for="fEmail">Tu correo <span style="text-transform:none;letter-spacing:0">(para avisarte de cambios)</span></label>
+        <input id="fEmail" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com">
+
+        <label>Quiénes venís</label>
+        <div id="plazas"></div>
+        <button class="mini" id="addPlaza" type="button">+ Añadir acompañante</button>
+
+        <label for="fAlergias">Alergias e intolerancias (de cualquiera del grupo)</label>
+        <input id="fAlergias" type="text" placeholder="Ej.: sin gluten, alergia a frutos secos… o deja en blanco">
+
+        <label for="fMensaje">Mensaje para el homenajeado</label>
+        <textarea id="fMensaje" placeholder="Una dedicatoria, una anécdota del búnker o de la carretera… Se las entregaremos todas el día de la comida."></textarea>
+
+        <div class="btns">
+          <button class="btn" type="submit" id="btnSave">Confirmar asistencia</button>
+        </div>
+        <div class="note" id="saveNote"></div>
+      </form>
+
+      <div id="okBox" class="ok-box hidden">
+        <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>
+        <h3>¡Apuntado!</h3>
+        <p id="okTxt" class="lead">Hemos recibido tu confirmación. Nos vemos allí.</p>
+        <button class="btn ghost" id="btnAgain" type="button">Apuntar a otra persona</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripes"></div>
+<footer>
+  <div class="wrap">
+    Kilómetro cero de la jubilación · Nos vemos en la salida 🏍️☢️<br>
+    <span id="contacto"></span>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   ZONA EDITABLE — cambia solo lo de aquí dentro y haz commit
+   ═══════════════════════════════════════════════════════════════ */
+var CONFIG = {
+
+  // ---- Formspree: crea un formulario NUEVO en formspree.io y pega su ID ----
+  formspreeId: "TU_ID_AQUI",          // ej.: "xabcdefg" (el final de formspree.io/f/xabcdefg)
+
+  // ---- Datos del evento ----
+  nombre:     "Nombre del homenajeado",
+  subtitulo:  "Radiofísico hospitalario · Motero de pura cepa",
+  tagline:    "Cuelga la bata, no el casco.",
+  fecha:      "",                      // "2026-11-14T14:00"  (vacío = "Por confirmar")
+  lugar:      "",                      // "Restaurante La Marina"
+  direccion:  "",                      // "Av. del Puerto 12, Valencia"
+  mapa:       "",                      // enlace de Google Maps (opcional)
+  dresscode:  "Chupa opcional, bata prohibida",
+  aportacion: "",                      // "45 € por persona · Bizum al 6XX XXX XXX"
+  notas:      "",                      // "Confirmar antes del 15 de octubre"
+  contacto:   "",                      // "Organiza: Fulanito · 6XX XXX XXX"
+
+  // ---- Menú ----
+  // Ponlo en true cuando el restaurante confirme los platos.
+  menuDisponible: false,
+  menus: [
+    // { id:"m1", nombre:"Arroz del senyoret", descripcion:"con sepia y gambas" },
+    // { id:"m2", nombre:"Entrecot a la brasa", descripcion:"con patata asada" },
+    // { id:"m3", nombre:"Opción vegana", descripcion:"risotto de setas" }
+  ]
+};
+/* ════════════════ FIN DE LA ZONA EDITABLE ════════════════ */
+
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var plazas = [{nombre:"", menu:""}];
+  var LS = "jubilacion_alta";
+
+  function menuAbierto(){ return !!CONFIG.menuDisponible && CONFIG.menus.length > 0; }
+
+  /* ---- Datos del evento ---- */
+  function setVal(id,v){
+    var el = $(id);
+    if (v && String(v).trim()){ el.textContent = v; el.classList.remove("tbd"); }
+    else { el.textContent = "Por confirmar"; el.classList.add("tbd"); }
+  }
+  function pintaConfig(){
+    $("heroName").textContent = CONFIG.nombre;
+    $("heroSub").textContent = CONFIG.subtitulo;
+    $("heroTag").textContent = CONFIG.tagline;
+    document.title = "Jubilación de " + CONFIG.nombre;
+    var d = CONFIG.fecha ? new Date(CONFIG.fecha) : null;
+    var ok = d && !isNaN(d.getTime());
+    setVal("cFecha", ok ? d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) : "");
+    setVal("cHora", ok ? d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}) + " h" : "");
+    setVal("cLugar", CONFIG.lugar);
+    setVal("cAporta", CONFIG.aportacion);
+    setVal("cNotas", CONFIG.notas);
+    setVal("cDress", CONFIG.dresscode);
+    $("cDireccion").textContent = CONFIG.direccion || "";
+    if (CONFIG.mapa){ $("cMapa").href = CONFIG.mapa; $("cMapa").classList.remove("hidden"); }
+    $("contacto").textContent = CONFIG.contacto || "";
+    if (ok) cuentaAtras(d);
+  }
+  function cuentaAtras(d){
+    var box = $("countdown");
+    var tick = function(){
+      var ms = d.getTime() - Date.now();
+      if (ms <= 0){ box.innerHTML = '<div style="padding:14px 22px"><b>¡Hoy es el día!</b></div>'; return; }
+      var s = Math.floor(ms/1000);
+      var p = [[Math.floor(s/86400),"días"],[Math.floor(s%86400/3600),"horas"],[Math.floor(s%3600/60),"min"],[s%60,"seg"]];
+      box.innerHTML = p.map(function(x){ return "<div><b>"+x[0]+"</b><span>"+x[1]+"</span></div>"; }).join("");
+    };
+    tick(); setInterval(tick, 1000);
+  }
+
+  /* ---- Aviso del menú ---- */
+  function pintaBanner(){
+    var b = $("banner");
+    b.className = "banner";
+    if (!menuAbierto()){
+      b.innerHTML = "<strong>El menú todavía no está cerrado.</strong> Apúntate ahora: cuando el restaurante nos pase los platos actualizaremos esta página y te escribiremos para que elijas. Sólo tienes que rellenar esto una vez.";
+      b.classList.add("warn");
+    } else {
+      b.innerHTML = "<strong>Menú disponible.</strong> Elige el plato de cada asistente al confirmar.";
+      b.classList.add("ok");
+    }
+    b.classList.remove("hidden");
+  }
+
+  /* ---- Plazas ---- */
+  function opciones(sel){
+    var o = '<option value="">— Elegir plato —</option>';
+    CONFIG.menus.forEach(function(m){
+      o += '<option value="'+m.nombre+'"'+(sel===m.nombre?" selected":"")+">"+m.nombre+(m.descripcion?" · "+m.descripcion:"")+"</option>";
+    });
+    return o;
+  }
+  function pintaPlazas(){
+    var c = $("plazas");
+    c.innerHTML = plazas.map(function(p,i){
+      var t = i===0 ? "Asistente 1 (tú)" : "Asistente "+(i+1);
+      var h = '<div class="plaza"><div class="ph"><span>'+t+"</span>";
+      h += i>0 ? '<button class="mini" data-del="'+i+'" type="button">Quitar</button>' : '<span style="opacity:.6">🏍️</span>';
+      h += "</div>";
+      if (i>0) h += '<input type="text" data-nom="'+i+'" placeholder="Nombre del acompañante" value="'+(p.nombre||"")+'" style="margin-top:10px">';
+      if (menuAbierto()) h += '<select data-menu="'+i+'" style="margin-top:10px">'+opciones(p.menu)+"</select>";
+      else h += '<div class="note">Plato: pendiente de publicar el menú.</div>';
+      return h + "</div>";
+    }).join("");
+    c.querySelectorAll("[data-nom]").forEach(function(el){
+      el.addEventListener("input", function(){ plazas[+el.dataset.nom].nombre = el.value; });
+    });
+    c.querySelectorAll("[data-menu]").forEach(function(el){
+      el.addEventListener("change", function(){ plazas[+el.dataset.menu].menu = el.value; });
+    });
+    c.querySelectorAll("[data-del]").forEach(function(el){
+      el.addEventListener("click", function(){ plazas.splice(+el.dataset.del,1); pintaPlazas(); });
+    });
+  }
+  $("addPlaza").addEventListener("click", function(){
+    if (plazas.length >= 6) return;
+    plazas.push({nombre:"",menu:""});
+    pintaPlazas();
+  });
+
+  /* ---- Envío ---- */
+  $("rsvp").addEventListener("submit", async function(ev){
+    ev.preventDefault();
+    var nota = $("saveNote");
+    var nombre = $("fResp").value.trim();
+    if (!nombre){ nota.textContent = "Escribe tu nombre para poder apuntarte."; $("fResp").focus(); return; }
+    if (!CONFIG.formspreeId || CONFIG.formspreeId === "TU_ID_AQUI"){
+      nota.textContent = "El formulario aún no está conectado. Avisa al organizador.";
+      return;
+    }
+    if (document.querySelector('[name="_gotcha"]').value) return;
+
+    plazas[0].nombre = nombre;
+    var lista = plazas.filter(function(p,i){ return i===0 || (p.nombre||"").trim(); });
+    var detalle = lista.map(function(p,i){
+      return (i+1) + ") " + (p.nombre||"(sin nombre)") + (p.menu ? " — " + p.menu : " — plato pendiente");
+    }).join("\n");
+
+    var payload = {
+      "Tipo": "Alta comida jubilación",
+      "Nombre": nombre,
+      "email": $("fEmail").value.trim(),
+      "Comensales": lista.length,
+      "Asistentes y platos": detalle,
+      "Alergias / intolerancias": $("fAlergias").value.trim() || "—",
+      "Mensaje para el homenajeado": $("fMensaje").value.trim() || "—",
+      "_subject": "Jubilación — alta de " + nombre + " (" + lista.length + ")"
+    };
+
+    $("btnSave").disabled = true;
+    nota.textContent = "Enviando…";
+    try{
+      var r = await fetch("https://formspree.io/f/" + CONFIG.formspreeId, {
+        method:"POST",
+        headers:{ "Content-Type":"application/json", "Accept":"application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!r.ok) throw new Error("http");
+      try{ localStorage.setItem(LS, JSON.stringify({nombre:nombre, n:lista.length, ts:Date.now()})); }catch(e){}
+      $("rsvp").classList.add("hidden");
+      $("okBox").classList.remove("hidden");
+      $("okTxt").textContent = menuAbierto()
+        ? "Hemos recibido tu confirmación y la elección de platos. Nos vemos allí."
+        : "Hemos recibido tu confirmación. Te avisaremos en cuanto se pueda elegir el menú.";
+      $("okBox").scrollIntoView({block:"center"});
+    }catch(e){
+      nota.textContent = "No se ha podido enviar. Revisa la conexión e inténtalo de nuevo.";
+    }finally{
+      $("btnSave").disabled = false;
+    }
+  });
+
+  $("btnAgain").addEventListener("click", function(){
+    plazas = [{nombre:"",menu:""}];
+    $("rsvp").reset(); pintaPlazas();
+    $("okBox").classList.add("hidden");
+    $("rsvp").classList.remove("hidden");
+    $("saveNote").textContent = "";
+    $("fResp").focus();
+  });
+
+  /* ---- Ya apuntado en este dispositivo ---- */
+  try{
+    var prev = JSON.parse(localStorage.getItem(LS) || "null");
+    if (prev && prev.nombre){
+      $("saveNote").textContent = "Ya te apuntaste desde este dispositivo (" + prev.nombre + ", " + prev.n + " comensales). Si vuelves a enviar, llegará una segunda alta: avísanos para que anulemos la anterior.";
+    }
+  }catch(e){}
+
+  pintaConfig(); pintaBanner(); pintaPlazas();
+})();
+</script>
+</body>
+</html>
