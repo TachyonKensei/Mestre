@@ -444,10 +444,11 @@ var CONFIG = {
   nombre:     "Juan Manuel Campayo",
   subtitulo:  "Radiofísico hospitalario · Motero de pura cepa",
   tagline:    "Cuelga la bata, no el casco.",
-  fecha:      "",                      // "2026-11-14T14:00"  (vacío = "Por confirmar")
-  lugar:      "",                      // "Restaurante La Marina"
-  direccion:  "",                      // "Av. del Puerto 12, Valencia"
-  mapa:       "",                      // enlace de Google Maps (opcional)
+  fecha:      "",                      // "2026-11-14T13:30"  (vacío = "Por confirmar")
+  hora:       "13:30 h",               // se muestra aunque todavía no haya fecha
+  lugar:      "Destino Puerto · Marina de Valencia",
+  direccion:  "Calle Muelle de la Aduana, s/n — junto al edificio Veles e Vents, 46024 València",
+  mapa:       "https://www.google.com/maps/search/?api=1&query=Destino+Puerto+Marina+de+Valencia",
   dresscode:  "Chupa opcional, bata prohibida",
   aportacion: "",                      // "45 € por persona · Bizum al 6XX XXX XXX"
   notas:      "",                      // "Confirmar antes del 15 de octubre"
@@ -486,7 +487,7 @@ var CONFIG = {
     var d = CONFIG.fecha ? new Date(CONFIG.fecha) : null;
     var ok = d && !isNaN(d.getTime());
     setVal("cFecha", ok ? d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) : "");
-    setVal("cHora", ok ? d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}) + " h" : "");
+    setVal("cHora", CONFIG.hora || (ok ? d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}) + " h" : ""));
     setVal("cLugar", CONFIG.lugar);
     setVal("cAporta", CONFIG.aportacion);
     setVal("cNotas", CONFIG.notas);
