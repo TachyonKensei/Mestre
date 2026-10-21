@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jubilación — Último turno, primera ruta</title>
-<meta name="description" content="Comida de jubilación de Juan Manuel Campayo. Confirma tu asistencia y elige menú.">
+<meta name="description" content="Comida de jubilación de Juan Manuel Campayo — sábado 24 de octubre, 13:45 h, Destino Puerto (Marina de Valencia).">
 <meta property="og:title" content="Jubilación de Juan Manuel Campayo — Último turno, primera ruta">
-<meta property="og:description" content="Comida de jubilación. Confirma tu asistencia y elige menú.">
+<meta property="og:description" content="Sábado 24 de octubre, 13:45 h · Destino Puerto, Marina de Valencia.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,32 +107,19 @@ h2{font-size:clamp(34px,6vw,52px)}
 .tbd{color:var(--muted);font-style:italic;font-weight:400}
 .bio p{margin:0 0 14px}
 .bio .pull{border-left:4px solid var(--orange);padding-left:16px;font-size:19px}
-.form{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
-label{display:block;font:600 13px/1 "Barlow";letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:16px 0 7px}
-input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 13px;min-height:46px}
-textarea{min-height:92px;resize:vertical}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);outline-offset:1px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 15px/1 "Barlow";
   letter-spacing:.06em;text-transform:uppercase;background:var(--orange);color:#14110e;border:0;
   border-radius:99px;padding:15px 26px;cursor:pointer;min-height:50px;text-decoration:none}
 .btn:hover{filter:brightness(1.07)}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .note{font-size:14px;color:var(--muted);margin-top:10px}
-.banner{border-radius:14px;padding:13px 15px;font-size:15px;margin-bottom:16px;border:1px dashed var(--line);background:var(--panel2)}
-.banner.warn{border-color:var(--orange);color:var(--orange-soft)}
-.banner.ok{border-style:solid;border-color:var(--ok);color:var(--ok)}
-.plaza{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:var(--panel2)}
-.plaza .ph{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.plaza .ph span{font:700 12px/1 "Barlow";letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
-.mini{background:none;border:0;color:var(--muted);font:600 13px "Barlow";cursor:pointer;text-decoration:underline;padding:4px 0}
-.ok-box{text-align:center;padding:26px 10px}
-.ok-box .tick{width:64px;height:64px;color:var(--ok);margin-bottom:10px}
-.ok-box h3{font-size:34px;margin-bottom:8px}
+.album-grid{display:grid;gap:22px;grid-template-columns:auto 1fr;align-items:center;margin-top:24px}
+@media(max-width:620px){.album-grid{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.qr-box{background:#fff;border-radius:18px;padding:14px;box-shadow:var(--shadow);line-height:0}
+.qr-box svg,.qr-box img{width:clamp(150px,40vw,200px);height:auto;display:block}
 footer{padding:34px 0 46px;text-align:center;color:var(--muted);font-size:14px}
 .hidden{display:none !important}
-.hp{position:absolute;left:-9999px}
 </style>
 </head>
 <body>
@@ -167,7 +154,7 @@ footer{padding:34px 0 46px;text-align:center;color:var(--muted);font-size:14px}
     <p class="tagline" id="heroTag">Cuelga la bata, no el casco.</p>
     <div class="count" id="countdown"></div>
     <div class="btns" style="justify-content:center">
-      <a class="btn" href="#alta">Confirmar asistencia</a>
+      <a class="btn" href="#album">Sube tus fotos</a>
     </div>
   </div>
 </header>
@@ -377,47 +364,25 @@ footer{padding:34px 0 46px;text-align:center;color:var(--muted);font-size:14px}
   </div>
 </section>
 
-<div class="stripes"></div>
 
-<section id="alta">
+<section id="album" style="background:var(--bg2)">
   <div class="wrap">
-    <div class="eyebrow">Confirmación de asistencia</div>
-    <h2>Dame el alta</h2>
-    <p class="lead">Apúntate, di cuántos venís y elige el plato de cada uno.</p>
+    <div class="eyebrow">Álbum compartido</div>
+    <h2>Sube tus fotos</h2>
+    <p class="lead">Mira y comparte todos los momentos especiales del evento en este álbum ✨ Escanea el código o pulsa el botón.</p>
 
-    <div id="banner" class="banner hidden" style="margin-top:20px"></div>
-
-    <div class="form" style="margin-top:20px">
-      <form id="rsvp" novalidate>
-        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-        <label for="fResp">Tu nombre</label>
-        <input id="fResp" type="text" autocomplete="name" placeholder="Nombre y apellido" required>
-
-        <label for="fEmail">Tu correo <span style="text-transform:none;letter-spacing:0">(para avisarte de cambios)</span></label>
-        <input id="fEmail" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com">
-
-        <label>Quiénes venís</label>
-        <div id="plazas"></div>
-        <button class="mini" id="addPlaza" type="button">+ Añadir acompañante</button>
-
-        <label for="fAlergias">Alergias e intolerancias (de cualquiera del grupo)</label>
-        <input id="fAlergias" type="text" placeholder="Ej.: sin gluten, alergia a frutos secos… o deja en blanco">
-
-        <label for="fMensaje">Mensaje para el homenajeado</label>
-        <textarea id="fMensaje" placeholder="Una dedicatoria, una anécdota del búnker o de la carretera… Se las entregaremos todas el día de la comida."></textarea>
-
-        <div class="btns">
-          <button class="btn" type="submit" id="btnSave">Confirmar asistencia</button>
+    <div class="album-grid">
+      <div class="qr-box"><div id="qrHolder"></div></div>
+      <div>
+        <div class="btns" style="margin-top:0">
+          <a class="btn" id="btnAlbum" target="_blank" rel="noopener">Entrar en el álbum</a>
         </div>
-        <div class="note" id="saveNote"></div>
-      </form>
-
-      <div id="okBox" class="ok-box hidden">
-        <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>
-        <h3>¡Apuntado!</h3>
-        <p id="okTxt" class="lead">Hemos recibido tu confirmación. Nos vemos allí.</p>
-        <button class="btn ghost" id="btnAgain" type="button">Apuntar a otra persona</button>
+        <div class="btns">
+          <a class="btn ghost" id="btnIos" target="_blank" rel="noopener">Descargar para iPhone</a>
+          <a class="btn ghost" id="btnAndroid" target="_blank" rel="noopener">Descargar para Android</a>
+        </div>
+        <p class="note" id="albumCod"></p>
+        <p class="note" id="albumNota"></p>
       </div>
     </div>
   </div>
@@ -437,71 +402,93 @@ footer{padding:34px 0 46px;text-align:center;color:var(--muted);font-size:14px}
    ═══════════════════════════════════════════════════════════════ */
 var CONFIG = {
 
-  // ---- Formspree: crea un formulario NUEVO en formspree.io y pega su ID ----
-  formspreeId: "TU_ID_AQUI",          // ej.: "xabcdefg" (el final de formspree.io/f/xabcdefg)
-
   // ---- Datos del evento ----
   nombre:     "Juan Manuel Campayo",
   subtitulo:  "Radiofísico hospitalario · Motero de pura cepa",
   tagline:    "Cuelga la bata, no el casco.",
-  fecha:      "",                      // "2026-11-14T13:30"  (vacío = "Por confirmar")
-  hora:       "13:30 h",               // se muestra aunque todavía no haya fecha
+  fecha:      "2026-10-24T13:45",      // alimenta la cuenta atrás de la cabecera
+  hora:       "13:45 h",
   lugar:      "Destino Puerto · Marina de Valencia",
   direccion:  "Calle Muelle de la Aduana, s/n — junto al edificio Veles e Vents, 46024 València",
   mapa:       "https://www.google.com/maps/search/?api=1&query=Destino+Puerto+Marina+de+Valencia",
   dresscode:  "Chupa opcional, bata prohibida",
   aportacion: "",                      // "45 € por persona · Bizum al 6XX XXX XXX"
-  notas:      "",                      // "Confirmar antes del 15 de octubre"
+  notas:      "",                      // "Aparcamiento en la Marina, llegad con margen"
   contacto:   "",                      // "Organiza: Fulanito · 6XX XXX XXX"
 
-  // ---- Menú ----
-  // Ponlo en true cuando el restaurante confirme los platos.
-  menuDisponible: false,
-  menus: [
-    // { id:"m1", nombre:"Arroz del senyoret", descripcion:"con sepia y gambas" },
-    // { id:"m2", nombre:"Entrecot a la brasa", descripcion:"con patata asada" },
-    // { id:"m3", nombre:"Opción vegana", descripcion:"risotto de setas" }
-  ]
+  // ---- Álbum compartido (Dots Memories) ----
+  album:    "https://web.dotstheapp.com/a?group=2574580&dlBy=Poker&code=H46LCV1mW8ba&utm_source=guest&utm_medium=share&utm_campaign=guest_event_album",
+  albumNombre: "Jubilación JM",        // nombre del álbum dentro de la app
+  albumCodigo: "H46LCV1mW8ba",         // por si alguien lo mete a mano en la app
+  albumQr:  "qr-album.svg",            // archivo del QR, en la misma carpeta
+  albumNota:"Si quieres dejarle un mensaje de voz o un vídeo, grábalo en el álbum: los usaremos para el regalo.",
+  albumIos:     "https://apps.apple.com/app/id6449039420",
+  albumAndroid: "https://play.google.com/store/search?q=Dots%20Memories&c=apps"
 };
 /* ════════════════ FIN DE LA ZONA EDITABLE ════════════════ */
 
 (function(){
   "use strict";
   var $ = function(id){ return document.getElementById(id); };
-  var plazas = [{nombre:"", menu:""}];
-  var LS = "jubilacion_alta";
 
-  function menuAbierto(){ return !!CONFIG.menuDisponible && CONFIG.menus.length > 0; }
-
-  /* ---- Datos del evento ---- */
-  function setVal(id,v){
+  function setVal(id, v){
     var el = $(id);
+    if (!el) return;
     if (v && String(v).trim()){ el.textContent = v; el.classList.remove("tbd"); }
     else { el.textContent = "Por confirmar"; el.classList.add("tbd"); }
   }
+
   function pintaConfig(){
     $("heroName").textContent = CONFIG.nombre;
-    $("heroSub").textContent = CONFIG.subtitulo;
-    $("heroTag").textContent = CONFIG.tagline;
+    $("heroSub").textContent  = CONFIG.subtitulo;
+    $("heroTag").textContent  = CONFIG.tagline;
     document.title = "Jubilación de " + CONFIG.nombre;
-    var d = CONFIG.fecha ? new Date(CONFIG.fecha) : null;
+
+    var d  = CONFIG.fecha ? new Date(CONFIG.fecha) : null;
     var ok = d && !isNaN(d.getTime());
+
     setVal("cFecha", ok ? d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) : "");
-    setVal("cHora", CONFIG.hora || (ok ? d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}) + " h" : ""));
-    setVal("cLugar", CONFIG.lugar);
+    setVal("cHora",  CONFIG.hora || (ok ? d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}) + " h" : ""));
+    setVal("cLugar",  CONFIG.lugar);
     setVal("cAporta", CONFIG.aportacion);
-    setVal("cNotas", CONFIG.notas);
-    setVal("cDress", CONFIG.dresscode);
+    setVal("cNotas",  CONFIG.notas);
+    setVal("cDress",  CONFIG.dresscode);
+
     $("cDireccion").textContent = CONFIG.direccion || "";
     if (CONFIG.mapa){ $("cMapa").href = CONFIG.mapa; $("cMapa").classList.remove("hidden"); }
     $("contacto").textContent = CONFIG.contacto || "";
+
+    if (CONFIG.album){
+      $("btnAlbum").href   = CONFIG.album;
+      $("btnIos").href     = CONFIG.albumIos;
+      $("btnAndroid").href = CONFIG.albumAndroid;
+      $("albumNota").textContent = CONFIG.albumNota || "";
+      if (CONFIG.albumCodigo){
+        $("albumCod").innerHTML = "Álbum «" + (CONFIG.albumNombre || "") +
+          "» · si lo buscas desde la app, el código es <strong>" + CONFIG.albumCodigo + "</strong>";
+      }
+      if (CONFIG.albumQr){
+        var img = new Image();
+        img.alt = "Código QR del álbum compartido";
+        img.onload  = function(){ $("qrHolder").appendChild(img); };
+        img.onerror = function(){ $("qrHolder").parentNode.style.display = "none"; };
+        img.src = CONFIG.albumQr;
+      } else {
+        $("qrHolder").parentNode.style.display = "none";
+      }
+    } else {
+      $("album").classList.add("hidden");
+    }
+
     if (ok) cuentaAtras(d);
   }
+
   function cuentaAtras(d){
     var box = $("countdown");
     var tick = function(){
       var ms = d.getTime() - Date.now();
-      if (ms <= 0){ box.innerHTML = '<div style="padding:14px 22px"><b>¡Hoy es el día!</b></div>'; return; }
+      if (ms <= -6*3600*1000){ box.innerHTML = '<div style="padding:14px 22px"><b>¡Gracias por venir!</b></div>'; return; }
+      if (ms <= 0){ box.innerHTML = '<div style="padding:14px 22px"><b>¡Es ahora!</b></div>'; return; }
       var s = Math.floor(ms/1000);
       var p = [[Math.floor(s/86400),"días"],[Math.floor(s%86400/3600),"horas"],[Math.floor(s%3600/60),"min"],[s%60,"seg"]];
       box.innerHTML = p.map(function(x){ return "<div><b>"+x[0]+"</b><span>"+x[1]+"</span></div>"; }).join("");
@@ -509,126 +496,7 @@ var CONFIG = {
     tick(); setInterval(tick, 1000);
   }
 
-  /* ---- Aviso del menú ---- */
-  function pintaBanner(){
-    var b = $("banner");
-    b.className = "banner";
-    if (!menuAbierto()){
-      b.innerHTML = "<strong>El menú todavía no está cerrado.</strong> Apúntate ahora: cuando el restaurante nos pase los platos actualizaremos esta página y te escribiremos para que elijas. Sólo tienes que rellenar esto una vez.";
-      b.classList.add("warn");
-    } else {
-      b.innerHTML = "<strong>Menú disponible.</strong> Elige el plato de cada asistente al confirmar.";
-      b.classList.add("ok");
-    }
-    b.classList.remove("hidden");
-  }
-
-  /* ---- Plazas ---- */
-  function opciones(sel){
-    var o = '<option value="">— Elegir plato —</option>';
-    CONFIG.menus.forEach(function(m){
-      o += '<option value="'+m.nombre+'"'+(sel===m.nombre?" selected":"")+">"+m.nombre+(m.descripcion?" · "+m.descripcion:"")+"</option>";
-    });
-    return o;
-  }
-  function pintaPlazas(){
-    var c = $("plazas");
-    c.innerHTML = plazas.map(function(p,i){
-      var t = i===0 ? "Asistente 1 (tú)" : "Asistente "+(i+1);
-      var h = '<div class="plaza"><div class="ph"><span>'+t+"</span>";
-      h += i>0 ? '<button class="mini" data-del="'+i+'" type="button">Quitar</button>' : '<span style="opacity:.6">🏍️</span>';
-      h += "</div>";
-      if (i>0) h += '<input type="text" data-nom="'+i+'" placeholder="Nombre del acompañante" value="'+(p.nombre||"")+'" style="margin-top:10px">';
-      if (menuAbierto()) h += '<select data-menu="'+i+'" style="margin-top:10px">'+opciones(p.menu)+"</select>";
-      else h += '<div class="note">Plato: pendiente de publicar el menú.</div>';
-      return h + "</div>";
-    }).join("");
-    c.querySelectorAll("[data-nom]").forEach(function(el){
-      el.addEventListener("input", function(){ plazas[+el.dataset.nom].nombre = el.value; });
-    });
-    c.querySelectorAll("[data-menu]").forEach(function(el){
-      el.addEventListener("change", function(){ plazas[+el.dataset.menu].menu = el.value; });
-    });
-    c.querySelectorAll("[data-del]").forEach(function(el){
-      el.addEventListener("click", function(){ plazas.splice(+el.dataset.del,1); pintaPlazas(); });
-    });
-  }
-  $("addPlaza").addEventListener("click", function(){
-    if (plazas.length >= 6) return;
-    plazas.push({nombre:"",menu:""});
-    pintaPlazas();
-  });
-
-  /* ---- Envío ---- */
-  $("rsvp").addEventListener("submit", async function(ev){
-    ev.preventDefault();
-    var nota = $("saveNote");
-    var nombre = $("fResp").value.trim();
-    if (!nombre){ nota.textContent = "Escribe tu nombre para poder apuntarte."; $("fResp").focus(); return; }
-    if (!CONFIG.formspreeId || CONFIG.formspreeId === "TU_ID_AQUI"){
-      nota.textContent = "El formulario aún no está conectado. Avisa al organizador.";
-      return;
-    }
-    if (document.querySelector('[name="_gotcha"]').value) return;
-
-    plazas[0].nombre = nombre;
-    var lista = plazas.filter(function(p,i){ return i===0 || (p.nombre||"").trim(); });
-    var detalle = lista.map(function(p,i){
-      return (i+1) + ") " + (p.nombre||"(sin nombre)") + (p.menu ? " — " + p.menu : " — plato pendiente");
-    }).join("\n");
-
-    var payload = {
-      "Tipo": "Alta comida jubilación",
-      "Nombre": nombre,
-      "email": $("fEmail").value.trim(),
-      "Comensales": lista.length,
-      "Asistentes y platos": detalle,
-      "Alergias / intolerancias": $("fAlergias").value.trim() || "—",
-      "Mensaje para el homenajeado": $("fMensaje").value.trim() || "—",
-      "_subject": "Jubilación — alta de " + nombre + " (" + lista.length + ")"
-    };
-
-    $("btnSave").disabled = true;
-    nota.textContent = "Enviando…";
-    try{
-      var r = await fetch("https://formspree.io/f/" + CONFIG.formspreeId, {
-        method:"POST",
-        headers:{ "Content-Type":"application/json", "Accept":"application/json" },
-        body: JSON.stringify(payload)
-      });
-      if (!r.ok) throw new Error("http");
-      try{ localStorage.setItem(LS, JSON.stringify({nombre:nombre, n:lista.length, ts:Date.now()})); }catch(e){}
-      $("rsvp").classList.add("hidden");
-      $("okBox").classList.remove("hidden");
-      $("okTxt").textContent = menuAbierto()
-        ? "Hemos recibido tu confirmación y la elección de platos. Nos vemos allí."
-        : "Hemos recibido tu confirmación. Te avisaremos en cuanto se pueda elegir el menú.";
-      $("okBox").scrollIntoView({block:"center"});
-    }catch(e){
-      nota.textContent = "No se ha podido enviar. Revisa la conexión e inténtalo de nuevo.";
-    }finally{
-      $("btnSave").disabled = false;
-    }
-  });
-
-  $("btnAgain").addEventListener("click", function(){
-    plazas = [{nombre:"",menu:""}];
-    $("rsvp").reset(); pintaPlazas();
-    $("okBox").classList.add("hidden");
-    $("rsvp").classList.remove("hidden");
-    $("saveNote").textContent = "";
-    $("fResp").focus();
-  });
-
-  /* ---- Ya apuntado en este dispositivo ---- */
-  try{
-    var prev = JSON.parse(localStorage.getItem(LS) || "null");
-    if (prev && prev.nombre){
-      $("saveNote").textContent = "Ya te apuntaste desde este dispositivo (" + prev.nombre + ", " + prev.n + " comensales). Si vuelves a enviar, llegará una segunda alta: avísanos para que anulemos la anterior.";
-    }
-  }catch(e){}
-
-  pintaConfig(); pintaBanner(); pintaPlazas();
+  pintaConfig();
 })();
 </script>
 </body>
